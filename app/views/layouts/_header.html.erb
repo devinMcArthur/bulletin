@@ -1,11 +1,13 @@
 <header class="navbar navbar-fixed-top navbar-inverse" style="background-color: #f48042;">
   <div class="container-fluid">
-    <p id="header-logo">Bulletin</p>
+    <%= link_to "Bulletin", root_path, id: "header-logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   '#', id: "header-content" %></li>
-        <li><%= link_to "Help",   '#', id: "header-content" %></li>
-        <li><%= link_to "Log in", '#', id: "header-content" %></li>
+        <li><%= link_to "Home",   root_path,  id: "header-content" %></li>
+        <li><%= link_to "Help",   help_path, id: "header-content" %></li>
+        
+        <li><%= link_to "Signup", signup_path, id: "header-content" %></li>
+        <li><%= link_to "Log in", '#',         id: "header-content" %></li>
       </ul>
     </nav>
   </div>
