@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   
   get '/signup'  => 'users#new'
   
+  # Create RESTful functionality, and many named routes ('rails console' -> 'rails routes' to check) 
+  resources :users
+  
 end
