@@ -2,6 +2,8 @@
 @import "bootstrap-sprockets";
 
 $brand_color: #f48042;
+$brand_color_hover: #f26e26;
+$brand_color_press: #f15d0e;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -72,6 +74,7 @@ p {
   &:hover {
     border-right: solid 2px #b2480e;
     border-left:  solid 2px #b2480e;
+    background: $brand_color_hover;
   }
 }
 
@@ -88,6 +91,12 @@ p {
     color: #3d3d3d;
     text-decoration: none;
   }
+}
+
+.dropdown-toggle[aria-expanded="true"] {
+  border-right: solid 2px #b2480e;
+  border-left:  solid 2px #b2480e;
+  background: $brand_color_press !important;
 }
 
 /* Footer */
