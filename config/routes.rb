@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   
   # Create RESTful functionality, and many named routes ('rails console' -> 'rails routes' to check) 
   resources :users
+  resources :account_activations, only: [:edit]
   
 end
