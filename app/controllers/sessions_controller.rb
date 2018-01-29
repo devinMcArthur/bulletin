@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       # Login functionality
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      redirect_back_or user
     else
       # Error message if login unsuccessful
       flash.now[:danger] = "Invalid login information"

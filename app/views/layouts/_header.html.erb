@@ -15,14 +15,24 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", '#' %></li>
+              <li><%= link_to "Profile",  current_user %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: :delete %>
               </li>
             </ul>
           </li>
+          <% if current_user.admin? %>
+            <ul class="nav navbar-nav navbar-right navbar-dark">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="header-content"> Admin <b class="caret"></b> &nbsp; </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><%= link_to "Users", users_url %></li>
+                  </ul>
+              </li>
+            </ul>
+          <% end %>
         <% else %>
           <li><%= link_to "Signup", signup_path, id: "header-content" %></li>
           <li><%= link_to "Log in", login_path,  id: "header-content" %></li>
