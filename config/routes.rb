@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
- 
-  get 'password_resets/new'
 
+  get 'password_resets/new'
   get 'password_resets/edit'
 
   get 'sessions/new'
@@ -20,9 +19,12 @@ Rails.application.routes.draw do
   
   get '/signup'  => 'users#new'
   
+  get '/courses' => 'courses#index'
+  
   # Create RESTful functionality, and many named routes ('rails console' -> 'rails routes' to check) 
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :courses,             only: [:new, :create, :destroy, :edit, :update, :show]
   
 end

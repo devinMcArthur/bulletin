@@ -1,0 +1,12 @@
+<li id="course-<%= course.id %>">
+    <h1 class="course-header-link"><%= link_to course.title, course %></h1>
+    <p>
+        <b>Course Number:</b> <%= course.code %><% if !course.section.nil? %>:<%= course.section %><% end %>
+    </p>
+    <p><%= truncate(course.description, length: 160, seperator: ' ') %></p>
+    
+    <% if current_user?(course.user) %>
+      </br><%= link_to "delete", course, method: :delete, data: { confirm: "You sure?" } %>
+    <% end %>
+    
+</li>

@@ -17,6 +17,11 @@ class ActiveSupport::TestCase
   def log_in_as(user)
     session[:user_id] = user.id
   end
+  
+  # Test if email is formatted as professor
+  def professor?(user)
+    /^[a-z+\-.]+@(stfx)\.ca$/i.match(user.email)
+  end
 
 end
 

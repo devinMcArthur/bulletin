@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account (email may take a few minutes to arrive)"
+      if @user.is_professor?
+        flash[:success] = "You have been recognized as a Professor, if you are a student it can be changed in Profile Settings"
+        @user.update_attribute(:professor, true)
+      end
       redirect_to root_url
     else
       render 'new'
@@ -50,7 +54,7 @@ class UsersController < ApplicationController
     
     # This is used to prevent users from passing raw paramaters in a web request, but will always require the :user attribute
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
     end
     
     # Confirms a logged in user

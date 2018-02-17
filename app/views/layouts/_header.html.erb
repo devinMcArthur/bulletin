@@ -6,8 +6,8 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         
-        <li><%= link_to "Home",   root_path,  id: "header-content" %></li>
-        <li><%= link_to "Help",   help_path, id: "header-content" %></li>
+        <li><%= link_to "Home",    root_path,  id: "header-content" %></li>
+        <li><%= link_to "Courses", courses_path, id: "header-content" %></li>
         
         <% if logged_in? %>
           <li class="dropdown">

@@ -1,0 +1,16 @@
+<% provide(:title, "Courses") %>
+<div class="row">
+  <aside class="col-sm-2 col-md-2 col-lg-2" style="float: left;">
+    <% if !current_user.nil? && professor?(current_user) %>
+      <%= link_to "Add Course", new_course_path, class: "btn btn-md btn-primary" %>
+    <% end %>
+  </aside>
+  <div class="col-sm-8 col-md-8 col-lg-8">
+    <% if @course_feed.any? %>
+      <ol class="courses-list">
+        <%= render @course_feed %>
+      </ol>
+      <%= will_paginate @course_feed %>
+    <% end %>
+  </div>
+</div>
