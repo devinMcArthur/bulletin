@@ -1,0 +1,7 @@
+<li>
+<%= User.find_by(id: request.user_id).name %>
+<div class="btn-group" data-toggle="buttons">
+  <%= link_to "Accept", '#', class: "btn btn-primary checkbox" %>
+  <%= link_to "Decline", '#', class: "btn btn-primary checkbox", name: "options", type: "radio" %>
+</div>
+</li>

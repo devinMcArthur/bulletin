@@ -7,6 +7,6 @@
     
     <% if current_user?(course.user) %>
       </br><%= link_to "delete", course, method: :delete, data: { confirm: "You sure?" } %>
+      <%= link_to "edit", edit_course_path(course), class: "edit-course-link" %>
     <% end %>
-    
 </li>

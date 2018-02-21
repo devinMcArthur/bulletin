@@ -18,6 +18,7 @@ gem 'jquery-rails',   '4.1.1'
 gem 'turbolinks',     '~> 5'
 gem 'jbuilder',       '~> 2.5'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'pickadate-rails'
 
 group :development, :test do
   gem 'sqlite3',  '1.3.13'

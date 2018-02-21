@@ -8,6 +8,8 @@
       </h1>
     </section>
   </aside>
-  <%= link_to "Add Course", courses_path, class: "btn btn-lg btn-primary" %>
+  <% if @user.professor == true %>
+    <%= link_to "Add Course", courses_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
   <p><b>Permission:</b> <% if @user.professor == true %> Professor<% else %> Student<% end %></p>
 </div>

@@ -26,5 +26,11 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :courses,             only: [:new, :create, :destroy, :edit, :update, :show]
+  resources :assignments,         only: [:create, :destroy, :edit, :update, :show]
+  resources :requests,            only: [:new, :create, :show, :index, :update, :edit]
+  
+  resources :courses do
+    resources :assignments
+  end
   
 end

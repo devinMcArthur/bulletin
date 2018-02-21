@@ -1,0 +1,21 @@
+<%= form_for(@course) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    
+    <%= f.text_field :title, placeholder: " Title", class: "form-contents" %>
+    
+    <%= f.text_field :code, placeholder: " Course Code", class: "form-contents" %>
+    
+    <%= f.text_field :section, placeholder: " Section Number", class: "form-contents" %>
+    
+    <%= f.text_area  :description, placeholder: " What is this course about . . .", class: "form-contents", size: '30x5' %>
+
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+    
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary submit" %>
+<% end %>

@@ -27,14 +27,25 @@ class CoursesController < ApplicationController
   # Show a particular Course
   def show
     @course = Course.find(params[:id])
+    
+    @assignment = @course.assignments.build
+    @assignments = @course.assignments.paginate(page: params[:page])
+    
+    @requests = @course.requests.paginate(page: params[:page])
   end
 
   def edit
+    @course = Course.find(params[:id])
   end
 
   def update
     @course = Course.find(params[:id])
-    @course.update_attributes(update_params)
+    if @course.update_attributes(course_params)
+      flash[:success] = "The course has successfully been updated"
+      redirect_to @course
+    else
+      render 'edit'
+    end
   end
 
   def destroy

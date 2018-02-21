@@ -1,25 +1,4 @@
 <% provide(:title, "Course Creation") %>
-
-<div class="course-form">
-  <h3>Add a Course</h3>
-  <%= form_for(@course) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <div class="field">
-      
-      <%= f.text_field :title, placeholder: " Title", class: "form-contents" %>
-      
-      <%= f.text_field :code, placeholder: " Course Code", class: "form-contents" %>
-      
-      <%= f.text_field :section, placeholder: "Section Number", class: "form-contents" %>
-      
-      <%= f.text_area  :description, placeholder: " What is this course about . . .", class: "form-contents", size: '50x20' %>
-      
-      <!--
-        Include Date selection here
-      -->
-      
-    </div>
-    <%= f.submit "Submit", class: "btn btn-primary submit" %>
-  <% end %>
-</div>
+<h3>Add a Course</h3>
+<%= render 'form' %>
 
