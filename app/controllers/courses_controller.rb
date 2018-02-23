@@ -1,7 +1,8 @@
 class CoursesController < ApplicationController
   
-  before_action :logged_in_user,  only: [:new, :create, :edit, :update, :destroy]
+  before_action :logged_in_user,  only: [:new, :create, :edit, :update, :destroy, :show]
   before_action :check_professor, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_approval,  only: [:show]
 
   def new
     @course = Course.new
@@ -9,6 +10,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = current_user.courses.build(course_params)
+    @course.update_attributes(admin_id: current_user.id)
     if @course.save
       # Handle sucessful course additions
       flash[:sucess] = "Your course has sucessfully been added!"
@@ -77,10 +79,29 @@ class CoursesController < ApplicationController
       end
     end
     
+    def check_ownership?
+      if @course.admin_id == current_user.id
+        return true
+      else
+        return false
+      end
+    end
+    
     def logged_in_user
       if current_user.nil?
         flash[:danger] = "Must be logged in to do this action!"
         redirect_to login_path
+      end
+    end
+    
+    def check_approval
+      @course = Course.find(params[:id])
+      if !Request.where(course_id: @course.id, user_id: current_user.id, approved: true).exists? 
+        if check_ownership?
+         return 
+        end
+        flash[:danger] = "You are not enrolled in this course"
+        redirect_to courses_path
       end
     end
   

@@ -70,7 +70,7 @@ p {
 
 .courses-list {
   list-style: none;
-  padding: 0;
+  padding: 5px;
   li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
@@ -98,6 +98,19 @@ p {
 
 .assignment-item {
   padding: 5px;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/* Requests */
+
+.user-request-list {
+  list-style: none;
+}
+
+.course-request-list {
+  list-style: none;
+  padding: 10px 0px 5px 0px;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
 }

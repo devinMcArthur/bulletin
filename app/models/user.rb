@@ -14,7 +14,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
-  has_many :courses, :foreign_key => :admin_id
+  # has_many :courses, :foreign_key => :admin_id
+  # belongs_to :courses
   has_and_belongs_to_many :courses
   
   has_many :requests, :foreign_key => :user_id

@@ -1,2 +1,14 @@
-<h1>Requests#index</h1>
-<p>Find me in app/views/requests/index.html.erb</p>
+<h1>Enrollment Approvals</h1>
+<% if Request.where(user_id: current_user.id).exists? %>
+  <ul class="user-request-list">
+    <% if @requests.where(approved: true).exists? %>
+      <h3>Enrolled</h3>
+      <%= render @requests.where(approved: true) %>
+    <% end %>
+    <% if @requests.where(approved: false).exists? %>
+      <h3>Request not yet approved</h3>
+      <%= render @requests.where(approved: false) %>
+    <% end %>
+  </ul>
+  <%= will_paginate @requests %>
+<% end %>

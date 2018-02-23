@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @courses = @user.courses.paginate(page: params[:page])
+    @my_courses = Course.where(admin_id: @user.id)
   end
   
   def new

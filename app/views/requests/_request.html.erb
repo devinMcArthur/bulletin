@@ -1,7 +1,48 @@
-<li>
-<%= User.find_by(id: request.user_id).name %>
-<div class="btn-group" data-toggle="buttons">
-  <%= link_to "Accept", '#', class: "btn btn-primary checkbox" %>
-  <%= link_to "Decline", '#', class: "btn btn-primary checkbox", name: "options", type: "radio" %>
-</div>
-</li>
+<% if current_user.professor == true %>
+
+  <!--Request Index for Course Page-->
+  <li class="course-request-list">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <h4><%= User.find_by(id: request.user_id).name %></h4>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4" style="float: right;">
+        <%= form_for request do |f| %>
+          <div class="btn-group" data-toggle="buttons">
+            
+            <% if request.approved == true %>
+              <%= f.label :approved, :value => "true", class: "btn btn-primary active" do %>
+                <%= f.radio_button :approved, true, :onchange => "$(this.form).submit();" %>
+                Accept
+              <% end %>
+              <%= f.label :approved, :value => "false", class: "btn btn-primary" do %>
+                <%= f.radio_button :approved, false, :onchange => "$(this.form).submit();" %>
+                Decline
+              <% end %>
+            <% else %>
+              <%= f.label :approved, :value => "true", class: "btn btn-primary" do %>
+                <%= f.radio_button :approved, true, :onchange => "$(this.form).submit();" %>
+                Accept
+              <% end %>
+              <%= f.label :approved, :value => "false", class: "btn btn-primary active" do %>
+                <%= f.radio_button :approved, false, :onchange => "$(this.form).submit();" %>
+                Decline
+              <% end %>
+              <%= f.hidden_field :course_id, value: request.course_id %>
+              <%= f.hidden_field :user_id,   value: request.user_id %>
+            <% end %>
+        
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </li>
+  
+<% else %>
+
+  <!--Request Index for Users-->
+  <li>
+    <b><%= Course.find_by(id: request.course_id).title %></b>
+  </li>
+  
+<% end %>

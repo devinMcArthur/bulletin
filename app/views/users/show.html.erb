@@ -1,15 +1,40 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-  <% if @user.professor == true %>
-    <%= link_to "Add Course", courses_path, class: "btn btn-lg btn-primary" %>
-  <% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= gravatar_for @user %>
+    <h1>
+      <%= @user.name %>
+    </h1>
+  </div>
   <p><b>Permission:</b> <% if @user.professor == true %> Professor<% else %> Student<% end %></p>
 </div>
+
+<% if Course.where(admin_id: @user.id).exists? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-sm-8 col-md-8 col-lg-8">
+          <h3>Courses I'm Teaching</h3>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" style="float: right;">
+          <%= link_to "Add Course", courses_path, class: "btn btn-md btn-primary active" %>
+        </div>
+      </div>
+    </div>
+    <ol class="courses-list">
+      <%= render @my_courses %>
+    </ol>
+  </div>  
+<% end %>
+
+<% if @user.courses.any? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Enrolled Courses</h3>
+    </div>
+    <ol class="courses-list">
+      <%= render @courses %>
+    </ol>
+    <%= will_paginate @courses %>
+  </div>
+<% end %>

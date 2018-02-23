@@ -2,46 +2,77 @@
 
 <h1><%= @course.title %></h1>
 
-<% if !current_user?(@course.user) && !current_user.nil? %>
-  <%= link_to "Join", new_request_path(:course_id => @course.id, :user_id => current_user.id), class: "btn btn-md btn-primary" %>
-<% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>Course Info</h3>
+  </div>
+  <p>
+    <b>Course Number:</b> <%= @course.code %><% if !@course.section.nil? %>:<%= @course.section %><% end %>
+  </p>
+  <% if !@course.start_date.nil? && !@course.end_date.nil? %>
+      <p><b>Date: </b><%= @course.start_date.strftime('%D') %> - <%= @course.end_date.strftime('%D') %></p>
+  <% end %>
+  <% if !@course.description.nil? %>
+    <p><b>Description:</b></p>
+    <p><%= @course.description %></p>
+  <% end %>
+</div>
 
-<p>
-  <b>Course Number:</b> <%= @course.code %><% if !@course.section.nil? %>:<%= @course.section %><% end %>
-</p>
-
-<% if !@course.start_date.nil? && !@course.end_date.nil? %>
-    <p><b>Date: </b><%= @course.start_date.strftime('%D') %> - <%= @course.end_date.strftime('%D') %></p>
-<% end %>
-
-<p><b>Description:</b></p>
-<p><%= @course.description %></p>
-
-<% if @course.assignments.exists? %>
-  <div class="row">
-    
-    <div class="col-sm-4 col-md-4 col-lg-4">
-      <h3>Assignments</h3>
-    </div>
-    
-    <% if current_user?(@course.user) %>
-      <div class="col-sm-4 col-md-4 col-lg-4" style="float: right;">
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="header-content">Add an Assignment <b class="caret"></b></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <div class="dropdown-assignment-form"><%= render 'shared/assignment_form' %></div>
-          </ul>
+<div class="panel panel-default">
+  <% if @course.assignments.exists? %>
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <h3>Assignments</h3>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" style="float: right;">
+          <% if @course.admin_id == current_user.id %>
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="header-content">Add an Assignment <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <div class="dropdown-assignment-form"><%= render 'shared/assignment_form' %></div>
+              </ul>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
-    
-  </div>
+    </div>
   <%= render @assignments %>
-<% end %>
+  <% else %>
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <h3>Assignments</h3>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" style="float: right;">
+            <% if @course.admin_id == current_user.id %>
+              <div class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="header-content">Add an Assignment <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <div class="dropdown-assignment-form"><%= render 'shared/assignment_form' %></div>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <h4>No Assignments have been added</h4>
+  <% end %>
+</div>
 
-<% if current_user?(@course.user) %>
-  <h3>Enrollment Requests</h3>
-  <%= render @requests %>
+
+<% if @course.admin_id == current_user.id %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Enrollment Requests</h3>
+    </div>
+    <ul>
+      <h2>Enrolled</h2>
+      <%= render @requests.where(approved: true) %>
+      <h2>Requests</h2>
+      <%= render @requests.where(approved: false) %>
+    </ul>
+  </div>
   </br><%= link_to "delete", @course, method: :delete, data: { confirm: "You sure?" } %>
   <%= link_to "edit", edit_course_path(@course), class: "edit-course-link" %>
 <% end %>

@@ -23,19 +23,36 @@ class RequestsController < ApplicationController
   end
 
   def show
+    
   end
 
   def index
+    @requests = Request.paginate(page: params[:page]).all
   end
 
   def update
+    @request = Request.find(params[:id])
+    @request.update_attributes(update_params)
+    redirect_to request.referrer || courses_path
+    @course = Course.find_by(id: @request.course_id)
+    @user = User.find_by(id: @request.user_id)
+    if @request.approved == true
+      @user.courses << @course
+    elsif
+      @user.courses.delete(@course)
+    end
   end
 
   def edit
+    @request = Request.find(params[:id])
   end
   
   private 
     def request_params
       params.permit(:course_id, :user_id, :approved)
+    end
+    
+    def update_params
+      params.require(:request).permit(:course_id, :user_id, :approved)
     end
 end

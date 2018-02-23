@@ -4,4 +4,6 @@ module CoursesHelper
   #   @current_course = Course.find_by(id: course [:id])
   # end
   
+  
+  
 end
