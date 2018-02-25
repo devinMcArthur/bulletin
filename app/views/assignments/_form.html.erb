@@ -1,37 +1,18 @@
-<%= form_with(model: assignment, local: true) do |form| %>
-  <% if assignment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
-
-      <ul>
-      <% assignment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@assignment) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :assignment_title %>
-  </div>
+    
+    <%= f.label :title %>
+    <%= f.text_field :title, placeholder: " Title", class: "form-contents" %>
+    
+    <%= f.label :description %>
+    <%= f.text_area  :description, placeholder: " What does this assignment entail . . .", class: "form-contents", size: '30x5' %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :assignment_description %>
-  </div>
+    <%= f.label :due_date %>
+    <%= f.date_field :due_date %>
+    
+    <%= f.text_field :course_id, value: @course.id, type: "hidden" %>
 
-  <div class="field">
-    <%= form.label :due_date %>
-    <%= form.datetime_select :due_date, id: :assignment_due_date %>
   </div>
-
-  <div class="field">
-    <%= form.label :course_id %>
-    <%= form.number_field :course_id, id: :assignment_course_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= f.submit "Submit", class: "btn btn-primary submit" %>
 <% end %>

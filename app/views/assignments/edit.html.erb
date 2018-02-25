@@ -1,6 +1,19 @@
-<h1>Editing Assignment</h1>
+<h3>Edit Assignment</h3>
+<%= form_for(@assignment) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    
+    <%= f.label :title %>
+    <%= f.text_field :title, placeholder: " Title", class: "form-contents" %>
+    
+    <%= f.label :description %>
+    <%= f.text_area  :description, placeholder: " What does this assignment entail . . .", class: "form-contents", size: '30x5' %>
 
-<%= render 'form', assignment: @assignment %>
+    <%= f.label :due_date %>
+    <%= f.date_field :due_date %>
+    
+    <%= f.text_field :course_id, value: @course.id, type: "hidden" %>
 
-<%= link_to 'Show', @assignment %> |
-<%= link_to 'Back', assignments_path %>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary submit" %>
+<% end %>

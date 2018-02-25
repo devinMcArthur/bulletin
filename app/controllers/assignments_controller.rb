@@ -1,7 +1,11 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
   before_action do 
-    @course = Course.find(params[:assignment][:course_id])
+    if @assignment.nil?
+      @course = Course.find(params[:assignment][:course_id])
+    else
+      @course = Course.find(@assignment.course_id)
+    end
   end
   
   def index
@@ -10,8 +14,19 @@ class AssignmentsController < ApplicationController
 
   def show
   end
+  
+  def update
+    @assignment = Assignment.find(params[:id])
+    if @assignment.update_attributes(assignment_params)
+      flash[:success] = "The assignment has successfully been updated"
+      redirect_to @course
+    else
+      render 'edit'
+    end
+  end
 
   def edit
+    @assignment = Assignment.find(params[:id])
   end
 
   def create
@@ -22,10 +37,6 @@ class AssignmentsController < ApplicationController
     else
       render 'courses/show'
     end
-  end
-
-  def update
-
   end
 
   def destroy
@@ -44,8 +55,5 @@ class AssignmentsController < ApplicationController
     def assignment_params
       params.require(:assignment).permit(:title, :description, :due_date, :course_id)
     end
-    
-    def find_course
-      @course = Course.find(params[:id])
-    end
+
 end

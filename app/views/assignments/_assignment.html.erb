@@ -21,4 +21,10 @@
     <% end %>
   <% end %>
   <p><b>Due Date: </b><%= assignment.due_date %></p> 
+  
+  <% if assignment.course.admin_id == current_user.id %>
+    <%= link_to "edit", edit_course_assignment_path(assignment, :course_id => assignment.course_id) %>
+    <%= link_to "delete", assignment, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+  
 </div>
