@@ -1,15 +1,38 @@
 <li id="course-<%= course.id %>">
     <h1 class="course-header-link"><%= link_to course.title, course %></h1>
-    <% if course.admin_id != current_user.id && !current_user.nil? && !Request.where(user_id: current_user.id, course_id: course.id).exists? %>
-        <%= link_to "Request Enrollment", new_request_path(:course_id => course.id, :user_id => current_user.id), class: "btn btn-md btn-primary" %>
+    <% if !current_user.nil? %>
+        <% if course.admin_id != current_user.id && !Request.where(user_id: current_user.id, course_id: course.id).exists? %>
+            <%= link_to "Request Enrollment", new_request_path(:course_id => course.id, :user_id => current_user.id), class: "btn btn-md btn-primary" %>
+        <% end %>
     <% end %>
     <p>
         <b>Course Number:</b> <%= course.code %><% if !course.section.nil? %>:<%= course.section %><% end %>
     </p>
-    <p><%= truncate(course.description, length: 160, seperator: ' ') %></p>
+    <% if !course.description.nil? %>
+        <% if course.description.length > 150 %>
+        <p><b>Description: </b><%= truncate(course.description, length: 150, seperator: ' ') %></p>
+        <%= link_to '...Read more', '', class: "read-more-#{course.id} truncate-switch" %>
+        <script>
+          $('.read-more-<%= course.id %>').on('click', function(e) {
+            e.preventDefault()
+            $(this).parent().html('<p><b>Title: </b><%= course.title %></p> <p><b>Description: </b><%= escape_javascript course.description %></p> <%= link_to '...Read less', '', class: "read-less-#{course.id} truncate-switch" %>')
+          })
+        </script>
+        <script>
+          $('.read-less-<%= course.id %>').on('click', function(d) {
+            d.preventDefault()
+            $(this).parent().html('<p><b>Title: </b><%= course.title %></p> <%= escape_javascript truncate(course.description, length: 150, seperator: ' ') %> <%= link_to '...Read more', '', class: "read-more-#{course.id} truncate-switch" %>')
+          })
+        </script>
+        <% else %>
+        <p><b>Description: </b><%= course.description %></p>
+        <% end %>
+    <% end %>
     
-    <% if course.admin_id == current_user.id %>
-      </br><%= link_to "delete", course, method: :delete, data: { confirm: "You sure?" } %>
-      <%= link_to "edit", edit_course_path(course), class: "edit-course-link" %>
+    <% if !current_user.nil? %>
+        <% if course.admin_id == current_user.id %>
+          </br><%= link_to "delete", course, method: :delete, data: { confirm: "You sure?" } %>
+          <%= link_to "edit", edit_course_path(course), class: "edit-course-link" %>
+        <% end %>
     <% end %>
 </li>

@@ -33,6 +33,13 @@ textarea {
   }
 }
 
+.truncate-switch {
+  border-bottom: solid 2px #e8e8e8;
+  a {
+    text-decoration: none;
+  }
+}
+
 /* Typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,6 +73,12 @@ p {
   text-align: center;
 }
 
+.signup-form {
+  padding: 10px;
+  border: solid 2px #e8e8e8;
+  margin: 5px;
+}
+
 /* Courses */
 
 .courses-list {
@@ -90,6 +103,17 @@ p {
   padding-left: 5px;
 }
 
+.courses-home-feed {
+  height: auto;
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.course-info {
+  padding: 5px;
+}
+
 /* Assignments */
 
 .dropdown-assignment-form {
@@ -100,6 +124,13 @@ p {
   padding: 5px;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
+}
+
+.assignments-home-feed {
+  height: auto;
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 /* Requests */
@@ -113,6 +144,29 @@ p {
   padding: 10px 0px 5px 0px;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
+}
+
+/* Calendar */
+
+.calendar-assignment-item {
+  border: solid 1px #e8e8e8;
+  font-size: auto;
+}
+
+.calendar-nextprev {
+  
+}
+
+.calendar-title {
+  display: inline-block;
+  font-size: 200%;
+  text-decoration: bold;
+  text-decoration: underline;
+  margin-left: 50px;
+}
+
+.home-calendar {
+  padding: 10px;
 }
 
 /* Header */
@@ -253,7 +307,7 @@ input {
   margin-left: 0;
 }
 
-/* Users Index */
+/* Users */
 
 .users {
   list-style: none;
@@ -263,6 +317,10 @@ input {
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
+}
+
+.user-info {
+  padding: 5px;
 }
 
 /* Miscellaneous */

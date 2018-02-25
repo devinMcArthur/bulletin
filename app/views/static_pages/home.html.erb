@@ -1,2 +1,121 @@
-<h1>Welcome to Bulletin!</h1>
-<p id="home-content">We are creating this app to replace and improve upon the functions of Moodle</p>
+<% if current_user.nil? %>
+  <div class="row">
+    
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1>Welcome to Bulletin!</h1>
+        </div>
+        <p id="home-content">We are creating this app to replace and improve upon the functions of Moodle</p>
+        <%= render 'shared/signup_form' %>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Recent Courses</h3>
+        </div>
+        <div class=" courses-home-feed">
+          <ol class="courses-list" %>
+            <%= render @courses %>
+          </ol>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+<% else %>
+
+  <h1>Hi <%= current_user.name.partition(" ").first %>, welcome back to Bulletin!</h1>
+  <% if current_user.professor == false %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Your Monthly Schedule</h3>
+      </div>
+      <div class="home-calendar">
+        <%= month_calendar events: @student_assignments, attribute: :due_date do |date, assignments| %>
+          <%= date.day %>
+          <% assignments.each do |assignment| %>
+            <div class="calendar-assignment-item">
+              <%= link_to truncate(assignment.title, length: 15, seperator: ' '), Course.find(assignment.course_id), :title => Course.find(assignment.course_id).title + ": " + assignment.title %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>This Weeks Assignments</h3>
+          </div>
+          <div class="assignments-home-feed">
+            <%= render @student_assignments_feed %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>My Courses</h3>
+          </div>
+          <div class=" courses-home-feed">
+            <ol class="courses-list" %>
+              <%= render @student_courses %>
+            </ol>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  <% else %>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Your Monthly Schedule</h3>
+      </div>
+      <div class="home-calendar">
+        <%= month_calendar events: @prof_assignments, attribute: :due_date do |date, assignments| %>
+          <%= date.day %>
+          <% assignments.each do |assignment| %>
+            <div class="calendar-assignment-item">
+              <%= link_to truncate(assignment.title, length: 15, seperator: ' '), Course.find(assignment.course_id), :title => Course.find(assignment.course_id).title + ": " + assignment.title %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>This Weeks Assignments</h3>
+          </div>
+          <div class="assignments-home-feed">
+            <%= render @prof_assignments_feed %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>My Courses</h3>
+          </div>
+          <div class=" courses-home-feed">
+            <ol class="courses-list" %>
+              <%= render @prof_courses %>
+            </ol>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  <% end %>
+<% end %>

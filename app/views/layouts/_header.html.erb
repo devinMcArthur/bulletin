@@ -8,8 +8,17 @@
         
         <li><%= link_to "Home",    root_path,  id: "header-content" %></li>
         <li><%= link_to "Courses", courses_path, id: "header-content" %></li>
-        
         <% if logged_in? %>
+          <% if current_user.admin? %>
+            <ul class="nav navbar-nav navbar-right navbar-dark">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="header-content">Admin <b class="caret"></b> &nbsp; </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><%= link_to "Users", users_url %></li>
+                  </ul>
+              </li>
+            </ul>
+          <% end %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" id="header-content" data-toggle="dropdown">
               Account <b class="caret"></b>
@@ -26,16 +35,6 @@
               </li>
             </ul>
           </li>
-          <% if current_user.admin? %>
-            <ul class="nav navbar-nav navbar-right navbar-dark">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="header-content">Admin <b class="caret"></b> &nbsp; </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li><%= link_to "Users", users_url %></li>
-                  </ul>
-              </li>
-            </ul>
-          <% end %>
         <% else %>
           <li><%= link_to "Signup", signup_path, id: "header-content" %></li>
           <li><%= link_to "Log in", login_path,  id: "header-content" %></li>

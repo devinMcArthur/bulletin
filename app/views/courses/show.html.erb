@@ -6,16 +6,18 @@
   <div class="panel-heading">
     <h3>Course Info</h3>
   </div>
-  <p>
-    <b>Course Number:</b> <%= @course.code %><% if !@course.section.nil? %>:<%= @course.section %><% end %>
-  </p>
-  <% if !@course.start_date.nil? && !@course.end_date.nil? %>
-      <p><b>Date: </b><%= @course.start_date.strftime('%D') %> - <%= @course.end_date.strftime('%D') %></p>
-  <% end %>
-  <% if !@course.description.nil? %>
-    <p><b>Description:</b></p>
-    <p><%= @course.description %></p>
-  <% end %>
+  <div class="course-info"
+    <p>
+      <b>Course Number:</b> <%= @course.code %><% if !@course.section.nil? %>:<%= @course.section %><% end %>
+    </p>
+    <% if !@course.start_date.nil? && !@course.end_date.nil? %>
+        <p><b>Date: </b><%= @course.start_date.strftime('%D') %> - <%= @course.end_date.strftime('%D') %></p>
+    <% end %>
+    <% if !@course.description.nil? %>
+      <p><b>Description:</b></p>
+      <p><%= @course.description %></p>
+    <% end %>
+  </div>
 </div>
 
 <div class="panel panel-default">

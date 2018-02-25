@@ -19,6 +19,7 @@ gem 'turbolinks',     '~> 5'
 gem 'jbuilder',       '~> 2.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'pickadate-rails'
+gem 'simple_calendar', '~> 2.0'
 
 group :development, :test do
   gem 'sqlite3',  '1.3.13'

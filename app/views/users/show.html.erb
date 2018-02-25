@@ -6,7 +6,9 @@
       <%= @user.name %>
     </h1>
   </div>
-  <p><b>Permission:</b> <% if @user.professor == true %> Professor<% else %> Student<% end %></p>
+  <div class="user-info">
+    <p><b>Permission:</b> <% if @user.professor == true %> Professor<% else %> Student<% end %></p>
+  </div>
 </div>
 
 <% if Course.where(admin_id: @user.id).exists? %>
