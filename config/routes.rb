@@ -23,14 +23,19 @@ Rails.application.routes.draw do
   
   # Create RESTful functionality, and many named routes ('rails console' -> 'rails routes' to check) 
   resources :users
-  resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :courses,             only: [:new, :create, :destroy, :edit, :update, :show]
-  resources :assignments,         only: [:create, :destroy, :edit, :update, :show]
-  resources :requests,            only: [:new, :create, :show, :index, :update, :edit]
+  resources :account_activations,    only: [:edit]
+  resources :password_resets,        only: [:new, :create, :edit, :update]
+  resources :courses,                only: [:new, :create, :destroy, :edit, :update, :show]
+  resources :assignments,            only: [:create, :destroy, :edit, :update, :show]
+  resources :requests,               only: [:new, :create, :show, :index, :update, :edit]
+  resources :assignment_attachments, only: [:create, :destroy, :edit, :update]
   
   resources :courses do
     resources :assignments
+  end
+  
+  resources :assignments do
+    resources :assignment_attachments
   end
   
 end

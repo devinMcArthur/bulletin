@@ -86,8 +86,8 @@ p {
   padding: 5px;
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-    border-bottom: 1px solid #e8e8e8;
+    border-top: 1px solid #b2b2b2;
+    border-bottom: 1px solid #b2b2b2;
   }
 }
 
@@ -105,6 +105,7 @@ p {
 
 .courses-home-feed {
   height: auto;
+  max-height: 500px;
   width: auto;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -122,15 +123,31 @@ p {
 
 .assignment-item {
   padding: 5px;
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
+  border-top: 1px solid #b2b2b2;
+  border-bottom: 1px solid #b2b2b2;
 }
 
 .assignments-home-feed {
   height: auto;
+  max-height: 500px;
   width: auto;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.assignment-attachment {
+  border: solid 1px black;
+  a:link {
+    text-decoration: none;
+    decoration: none;
+  }
+}
+
+.attachment-item {
+  a {
+    text-decoration: none;
+    decoration: none;
+  }
 }
 
 /* Requests */

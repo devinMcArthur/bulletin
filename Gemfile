@@ -20,6 +20,9 @@ gem 'jbuilder',       '~> 2.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'pickadate-rails'
 gem 'simple_calendar', '~> 2.0'
+gem 'paperclip',      '~> 5.2.1'
+gem 'paperclip-ghostscript'
+
 
 group :development, :test do
   gem 'sqlite3',  '1.3.13'
@@ -33,6 +36,7 @@ group :development do
   gem 'listen',                '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rails-erd'
 end
 
 group :test do

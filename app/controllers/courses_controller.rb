@@ -34,6 +34,14 @@ class CoursesController < ApplicationController
     @assignments = @course.assignments.paginate(page: params[:page])
     
     @requests = @course.requests.paginate(page: params[:page])
+    
+    @attachment = @assignment.assignment_attachments.build
+    
+    @attachments = []
+    
+    @assignments.each do |a|
+      @attachments << AssignmentAttachment.find_by(assignment_id: a.id)
+    end
   end
 
   def edit

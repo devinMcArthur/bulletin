@@ -1,13 +1,16 @@
 <li id="course-<%= course.id %>">
     <h1 class="course-header-link"><%= link_to course.title, course %></h1>
+    
     <% if !current_user.nil? %>
         <% if course.admin_id != current_user.id && !Request.where(user_id: current_user.id, course_id: course.id).exists? %>
             <%= link_to "Request Enrollment", new_request_path(:course_id => course.id, :user_id => current_user.id), class: "btn btn-md btn-primary" %>
         <% end %>
     <% end %>
+    
     <p>
         <b>Course Number:</b> <%= course.code %><% if !course.section.nil? %>:<%= course.section %><% end %>
     </p>
+    
     <% if !course.description.nil? %>
         <% if course.description.length > 150 %>
         <p><b>Description: </b><%= truncate(course.description, length: 150, seperator: ' ') %></p>

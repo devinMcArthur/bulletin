@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account (email may take a few minutes to arrive)"
+      flash[:info] = "Please check your email to activate your account (email may take a few minutes to arrive, or may be sorted into your junk folder)"
       if @user.is_professor?
         flash[:success] = "You have been recognized as a Professor, if you are a student it can be changed in Profile Settings"
         @user.update_attribute(:professor, true)

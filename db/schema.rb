@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221003025) do
+ActiveRecord::Schema.define(version: 20180306204819) do
+
+  create_table "assignment_attachments", force: :cascade do |t|
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "assignment_id"
+  end
 
   create_table "assignments", force: :cascade do |t|
     t.string "title"
@@ -19,6 +29,8 @@ ActiveRecord::Schema.define(version: 20180221003025) do
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "weight", default: 0
+    t.string "importance", default: "Standard"
   end
 
   create_table "courses", force: :cascade do |t|

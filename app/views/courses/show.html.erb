@@ -8,15 +8,21 @@
   </div>
   <div class="course-info"
     <p>
+    <b>Professor: </b><%= User.where(id: @course.admin_id).name %>
+    </p>
+    <p>
       <b>Course Number:</b> <%= @course.code %><% if !@course.section.nil? %>:<%= @course.section %><% end %>
     </p>
     <% if !@course.start_date.nil? && !@course.end_date.nil? %>
         <p><b>Date: </b><%= @course.start_date.strftime('%D') %> - <%= @course.end_date.strftime('%D') %></p>
     <% end %>
     <% if !@course.description.nil? %>
-      <p><b>Description:</b></p>
-      <p><%= @course.description %></p>
+      <p>
+      <b>Description:</b>
+      <%= @course.description %>
+      </p>
     <% end %>
+    
   </div>
 </div>
 
@@ -39,7 +45,7 @@
         </div>
       </div>
     </div>
-  <%= render @assignments %>
+    <%= render @assignments, locals: { course: @course } %>
   <% else %>
     <div class="panel-heading">
       <div class="row">

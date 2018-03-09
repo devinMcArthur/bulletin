@@ -1,0 +1,14 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"ApplicationRecord" []
+	"Assignment" [shape=Mrecord, label="{Assignment|id :integer\ltitle :varchar\ldescription :text\ldue_date :datetime\lcourse_id :integer\lcreated_at :datetime\lupdated_at :datetime\lweight :integer\limportance :varchar\l}"]
+	"Request" [shape=Mrecord, label="{Request|id :INTEGER\lcourse_id :integer\luser_id :integer\lapproved :boolean\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Attachment" [shape=Mrecord, label="{Attachment|id :INTEGER\lcontroller_name :varchar\lcontroller_id :integer\lattachment_file_name :varchar\lattachment_content_type :varchar\lattachment_file_size :integer\lattachment_updated_at :datetime\lcreated_at :datetime\lupdated_at :datetime\lassignment_id :integer\l}"]
+	"Course" [shape=Mrecord, label="{Course|id :INTEGER\ltitle :varchar\lcode :varchar\lsection :integer\ladmin :varchar\ladmin_id :integer\lstart_date :datetime\lend_date :datetime\lcreated_at :datetime\lupdated_at :datetime\ldescription :text\l}"]
+	"User" [shape=Mrecord, label="{User|id :INTEGER\lname :varchar\lemail :varchar\lcreated_at :datetime\lupdated_at :datetime\lpassword_digest :varchar\lremember_digest :varchar\ladmin :boolean\lactivation_digest :varchar\lactivated :boolean\lactivated_at :datetime\lreset_digest :varchar\lreset_sent_at :datetime\lprofessor :boolean\l}"]
+	"Assignment" -> "Attachment" [arrowtail=odot, arrowhead=crow, dir=both color="#3906CD"]
+	"Course" -> "Assignment" [arrowtail=odot, arrowhead=crow, dir=both color="#DA9703"]
+	"Course" -> "Request" [arrowtail=odot, arrowhead=crow, dir=both color="#DB0D0E"]
+	"Course" -> "User" [arrowtail=crow, arrowhead=crow, dir=both color="#CE7C43"]
+	"User" -> "Request" [arrowtail=odot, arrowhead=crow, dir=both color="#E412A5"]
+}

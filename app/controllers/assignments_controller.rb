@@ -1,11 +1,20 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  before_action do 
+  before_action do
     if @assignment.nil?
-      @course = Course.find(params[:assignment][:course_id])
+      if !params[:assignment].nil?
+        @course = Course.find(params[:assignment][:course_id])
+      else
+        @course = Course.find(params[:course_id])
+      end
     else
       @course = Course.find(@assignment.course_id)
     end
+  end
+  
+  def new
+    @assignment = Assignment.new
+    @assignment.assignment_attachments.build
   end
   
   def index
@@ -32,10 +41,15 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = @course.assignments.build(assignment_params)
     if @assignment.save
+      @assignments = @course.assignments
+      logger.info(@assignment.errors.full_messages)
       flash[:success] = "The assignment has been successfully added"
       redirect_to @course
     else
-      render 'courses/show'
+      @assignments = @course.assignments
+      logger.info(@assignment.errors.full_messages)
+      flash[:danger] = "Assignment upload was unsuccessful"
+      redirect_to @course
     end
   end
 
@@ -53,7 +67,7 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:title, :description, :due_date, :course_id)
+      params.require(:assignment).permit(:title, :description, :due_date, :course_id, assignment_attachments_attributes: [:attachment, :assignment_id])
     end
 
 end

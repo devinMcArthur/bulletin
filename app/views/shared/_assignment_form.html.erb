@@ -11,6 +11,12 @@
     <%= f.label :due_date %>
     <%= f.date_field :due_date %>
     
+    <%= f.fields_for :assignment_attachments do |a| %>
+      <%= a.label :attachment %>
+      <%= a.file_field :attachment %>
+      <%= a.text_field :assignment_id, value: 1, type: "hidden" %>
+    <% end %>
+    
     <%= f.text_field :course_id, value: @course.id, type: "hidden" %>
 
   </div>

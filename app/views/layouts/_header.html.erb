@@ -24,6 +24,8 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              <li><b><%= current_user.name %></b></li>
+              <li class="divider"></li>
               <li><%= link_to "Profile",  current_user %></li>
               <% if current_user.professor == false %>
                 <li><%= link_to "Requests", requests_path %></li>
