@@ -1,8 +1,23 @@
-<%= form_for(@attachment) do |a| %>
+<% if !@attachments.nil? %>
+    <% @attachments.each do |l| %>
+        <% if !l.attachment_file_name.nil? %>
+            <li style="list-style: none;">
+              <div class="assignment-attachment">
+                <%= link_to l.attachment_file_name, l.attachment.url, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
+                <%= link_to "delete", l, method: :delete, data: { confirm: "You sure?" } %>
+              </div>
+            </li>
+        <% end %>
+    <% end %>
+<% end %>
 
-    <%= a.label :attachment %>
-    <%= a.file_field :attachment %>
-
-
-    
+<!-- Ensures fields_for only outputs a single form -->
+<% counter = 0 %>
+<%= f.fields_for :assignment_attachments do |a| %>
+    <% if counter == 0 %>
+        <% counter = counter + 1 %>
+        <%= a.label :attachment %>
+        <%= a.file_field :attachment %>
+        <%= a.text_field :assignment_id, value: 1, type: "hidden" %>
+    <% end %>
 <% end %>

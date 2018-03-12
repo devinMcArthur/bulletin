@@ -36,6 +36,8 @@ class AssignmentsController < ApplicationController
 
   def edit
     @assignment = Assignment.find(params[:id])
+    @attachments = @assignment.assignment_attachments
+    @attachment = @assignment.assignment_attachments.build
   end
 
   def create
@@ -69,5 +71,10 @@ class AssignmentsController < ApplicationController
     def assignment_params
       params.require(:assignment).permit(:title, :description, :due_date, :course_id, assignment_attachments_attributes: [:attachment, :assignment_id])
     end
+    
+    def attachment_params
+      params.require(:assignment_attachment).permit(:assignment_id, :attachment)
+    end
+    
 
 end

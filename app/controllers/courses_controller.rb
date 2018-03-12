@@ -40,7 +40,10 @@ class CoursesController < ApplicationController
     @attachments = []
     
     @assignments.each do |a|
-      @attachments << AssignmentAttachment.find_by(assignment_id: a.id)
+      b = AssignmentAttachment.where(assignment_id: a.id)
+      b.each do |f|
+        @attachments << f
+      end
     end
   end
 

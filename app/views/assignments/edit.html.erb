@@ -12,10 +12,11 @@
     <%= f.label :due_date %>
     <%= f.date_field :due_date %>
     
-    <%= render 'shared/assignment_attachment_form' %>
+    <%= render 'shared/assignment_attachment_form', :f => f %>
     
     <%= f.text_field :course_id, value: @course.id, type: "hidden" %>
 
   </div>
   <%= f.submit "Submit", class: "btn btn-primary submit" %>
 <% end %>
+<%= link_to "delete", @assignment, method: :delete, data: { confirm: "You sure?" } %>

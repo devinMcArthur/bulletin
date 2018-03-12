@@ -1,6 +1,6 @@
 <div class="assignment-item">
   <p><b>Title: </b><u><%= assignment.title %></u></p>
-  <% if !assignment.description.nil? %>
+  <% if !assignment.description.blank? %>
     <% if assignment.description.length > 150 %>
       <p><b>Description: </b><%= truncate(assignment.description, length: 150, seperator: ' ') %></p>
       <%= link_to '...Read more', '', class: "read-more-#{assignment.id} truncate-switch" %>
@@ -20,23 +20,27 @@
       <p><b>Description: </b><%= assignment.description %></p>
     <% end %>
   <% end %>
-  <p><b>Due Date: </b><%= assignment.due_date %></p>
+  <% if !assignment.due_date.nil? %>
+    <p><b>Due Date: </b><%= assignment.due_date %></p>
+  <% end %>
   
   <% if !@attachments.nil? %>
     <% @attachments.each do |a| %>
       <% if !a.nil? %>
         <% if a.assignment_id == assignment.id %>
           <% if a.attachment.url != '/attachments/original/missing.png' %>
-            <div class="assignment-attachment">
-              <%= link_to a.attachment_file_name, a.attachment.url, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
-            </div>
+            <li style="list-style: none;">
+              <div class="assignment-attachment">
+                <%= link_to a.attachment_file_name, a.attachment.url, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
+              </div>
+            </li>
           <% end %>
         <% end %>
       <% end %>
     <% end %>
   <% end %>
   
-  <% if assignment.course.admin_id == current_user.id %>
+  <% if assignment.course.admin_id == current_user.id && !current_page?(root_url) %>
     <%= link_to "edit", edit_course_assignment_path(@course, assignment) %>
     <%= link_to "delete", assignment, method: :delete, data: { confirm: "You sure?" } %>
   <% end %>

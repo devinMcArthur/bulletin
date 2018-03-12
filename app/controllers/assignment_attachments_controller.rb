@@ -18,9 +18,9 @@ class AssignmentAttachmentsController < ApplicationController
   end
   
   def destroy
-    @assignment = Assignment.find(params[:assignment_id])
-    @assignment_attachment = @assignment.assignment_attachments.find(params[:id])
+    @assignment_attachment = AssignmentAttachment.find(params[:id])
     @assignment_attachment.destroy
+    redirect_to request.referrer || courses_path
   end
   
   private
