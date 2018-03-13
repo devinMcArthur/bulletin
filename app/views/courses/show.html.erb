@@ -22,7 +22,10 @@
       <%= @course.description %>
       </p>
     <% end %>
-    
+    <% if @course.admin_id == current_user.id %>
+      </br><%= link_to "delete", @course, method: :delete, data: { confirm: "You sure?" } %>
+      <%= link_to "edit", edit_course_path(@course), class: "edit-course-link" %>
+    <% end %>
   </div>
 </div>
 
@@ -69,7 +72,7 @@
 </div>
 
 
-<% if @course.admin_id == current_user.id %>
+<% if @course.admin_id == current_user.id && @course.public == true %>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3>Enrollment Requests</h3>
@@ -81,7 +84,5 @@
       <%= render @requests.where(approved: false) %>
     </ul>
   </div>
-  </br><%= link_to "delete", @course, method: :delete, data: { confirm: "You sure?" } %>
-  <%= link_to "edit", edit_course_path(@course), class: "edit-course-link" %>
 <% end %>
 

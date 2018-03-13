@@ -1,7 +1,6 @@
 class CoursesController < ApplicationController
   
   before_action :logged_in_user,  only: [:new, :create, :edit, :update, :destroy, :show]
-  before_action :check_professor, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_approval,  only: [:show]
 
   def new
@@ -23,7 +22,7 @@ class CoursesController < ApplicationController
 
   # Index of all courses
   def index
-    @course_feed = Course.all.paginate(page: params[:page])
+    @course_feed = Course.where(public: true).all.paginate(page: params[:page])
   end
   
   # Show a particular Course
@@ -76,18 +75,11 @@ class CoursesController < ApplicationController
   private
   
     def course_params
-      params.require(:course).permit(:title, :description, :code, :section, :admin, :admin_id, :start_date, :end_date)
+      params.require(:course).permit(:title, :description, :code, :section, :admin, :admin_id, :start_date, :end_date, :public)
     end
     
     def update_params
-      params.require(:course).permit(:admin, :admin_id, :start_date, :end_date)
-    end
-  
-    def check_professor
-      if current_user.professor == false
-        flash[:danger] = "Must be a Professor to create a course"
-        redirect_to root_url
-      end
+      params.require(:course).permit(:admin, :admin_id, :start_date, :end_date, :public)
     end
     
     def check_ownership?

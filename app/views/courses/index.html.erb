@@ -3,10 +3,12 @@
   <aside class="col-sm-2 col-md-2 col-lg-2" style="float: left;">
     <% if !current_user.nil? && professor?(current_user) %>
       <%= link_to "Add Course", new_course_path, class: "btn btn-md btn-primary" %>
+    <% elsif !current_user.nil? && !professor?(current_user) %>
+      <%= link_to "Add Private Course", new_course_path, class: "btn btn-md btn-primary" %>
     <% end %>
   </aside>
   <div class="col-sm-8 col-md-8 col-lg-8">
-    <h1>All Courses</h1>
+    <h1>All Public Courses</h1>
     <% if @course_feed.any? %>
       <ol class="courses-list">
         <%= render @course_feed %>
