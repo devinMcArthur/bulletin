@@ -31,7 +31,7 @@
           <% if a.attachment.url != '/attachments/original/missing.png' %>
             <li style="list-style: none;">
               <div class="assignment-attachment">
-                <%= link_to a.attachment_file_name, a.attachment.path, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
+                <%= link_to a.attachment_file_name, a.attachment.url, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
               </div>
             </li>
           <% end %>
