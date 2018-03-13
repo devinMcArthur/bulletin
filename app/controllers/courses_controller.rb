@@ -37,8 +37,8 @@ class CoursesController < ApplicationController
     
     @attachment = @assignment.assignment_attachments.build
     
+    # Create an array with all related attachments
     @attachments = []
-    
     @assignments.each do |a|
       b = AssignmentAttachment.where(assignment_id: a.id)
       b.each do |f|

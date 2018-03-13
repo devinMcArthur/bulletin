@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :courses,                only: [:new, :create, :destroy, :edit, :update, :show]
   resources :assignments,            only: [:create, :destroy, :edit, :update, :show]
   resources :requests,               only: [:new, :create, :show, :index, :update, :edit]
-  resources :assignment_attachments, only: [:create, :destroy, :edit, :update]
+  resources :assignment_attachments
   
   resources :courses do
     resources :assignments

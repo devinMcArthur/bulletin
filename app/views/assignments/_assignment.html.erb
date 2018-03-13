@@ -2,22 +2,22 @@
   <p><b>Title: </b><u><%= assignment.title %></u></p>
   <% if !assignment.description.blank? %>
     <% if assignment.description.length > 150 %>
-      <p><b>Description: </b><%= truncate(assignment.description, length: 150, seperator: ' ') %></p>
+      <p><b>Description: </b><%= truncate(simple_format(assignment.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %></p>
       <%= link_to '...Read more', '', class: "read-more-#{assignment.id} truncate-switch" %>
       <script>
         $('.read-more-<%= assignment.id %>').on('click', function(e) {
           e.preventDefault()
-          $(this).parent().html('<p><b>Title: </b><%= assignment.title %></p> <p><b>Description: </b><pre><%= escape_javascript assignment.description %></pre></p> <%= link_to '...Read less', '', class: "read-less-#{assignment.id} truncate-switch" %> <p><b>Due Date: </b><%= assignment.due_date %></p>')
+          $(this).parent().html('<p><b>Title: </b><%= assignment.title %></p> <p><b>Description: </b><%= escape_javascript simple_format(assignment.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p> <%= link_to '...Read less', '', class: "read-less-#{assignment.id} truncate-switch" %> <p><b>Due Date: </b><%= assignment.due_date %></p>')
         })
       </script>
       <script>
         $('.read-less-<%= assignment.id %>').on('click', function(d) {
           d.preventDefault()
-          $(this).parent().html('<p><b>Title: </b><%= assignment.title %></p> <%= escape_javascript truncate(assignment.description, length: 150, seperator: ' ') %> <%= link_to '...Read more', '', class: "read-more-#{assignment.id} truncate-switch" %> <p><b>Due Date: </b><%= assignment.due_date %></p>')
+          $(this).parent().html('<p><b>Title: </b><%= assignment.title %></p> <p><b>Description: </b><%= escape_javascript truncate(simple_format(assignment.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %></p> <%= link_to '...Read more', '', class: "read-more-#{assignment.id} truncate-switch" %> <p><b>Due Date: </b><%= assignment.due_date %></p>')
         })
       </script>
     <% else %>
-      <p><b>Description: </b><%= assignment.description %></p>
+      <p><b>Description: </b><%= simple_format(assignment.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p>
     <% end %>
   <% end %>
   <% if !assignment.due_date.nil? %>
@@ -31,7 +31,7 @@
           <% if a.attachment.url != '/attachments/original/missing.png' %>
             <li style="list-style: none;">
               <div class="assignment-attachment">
-                <%= link_to a.attachment_file_name, a.attachment.url, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
+                <%= link_to a.attachment_file_name, a.attachment.path, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
               </div>
             </li>
           <% end %>
