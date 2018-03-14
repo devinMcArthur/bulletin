@@ -9,7 +9,6 @@ class StaticPagesController < ApplicationController
         @prof_assignments = Assignment.where(course_id: @prof_courses.ids)
       else
         @student_courses = current_user.courses
-        @student_private_courses = Course.where(admin_id: current_user.id, public: false).all
         @student_assignments_feed = Assignment.where(course_id: @student_courses.ids, due_date: [Time.now .. Time.now + 7.days]).all.order(due_date: :asc)
         @student_assignments = Assignment.where(course_id: @student_courses.ids)
       end

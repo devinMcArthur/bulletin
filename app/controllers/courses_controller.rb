@@ -11,6 +11,11 @@ class CoursesController < ApplicationController
     @course = current_user.courses.build(course_params)
     @course.update_attributes(admin_id: current_user.id)
     if @course.save
+      if @course.public == false
+        if current_user.professor == false
+          current_user.courses << @course
+        end
+      end
       # Handle sucessful course additions
       flash[:sucess] = "Your course has sucessfully been added!"
       redirect_to courses_path
@@ -53,6 +58,13 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find(params[:id])
     if @course.update_attributes(course_params)
+      if @course.public == false
+        if current_user.professor == false
+          if !current_user.courses.exists?(@course.id)
+            current_user.courses << @course
+          end
+        end
+      end
       flash[:success] = "The course has successfully been updated"
       redirect_to @course
     else

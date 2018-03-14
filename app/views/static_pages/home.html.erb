@@ -64,13 +64,6 @@
             <h3>My Courses</h3>
           </div>
           <div class=" courses-home-feed">
-            <% if @student_private_courses.any? %>
-              <h3><u>Private Courses</u></h3>
-              <ol class="courses-list">
-                <%= render @student_private_courses %>
-              </ol>
-              <h3><u>Enrolled Courses</u></h3>
-            <% end %>
             <ol class="courses-list" %>
               <%= render @student_courses %>
             </ol>
