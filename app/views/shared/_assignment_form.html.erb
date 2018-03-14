@@ -9,7 +9,7 @@
     <%= f.text_area  :description, placeholder: " What does this assignment entail . . .", class: "form-contents", size: '30x5' %>
 
     <%= f.label :due_date %>
-    <%= f.date_field :due_date %>
+    <%= f.datetime_field :due_date %>
     
     <%= f.fields_for :assignment_attachments do |a| %>
       <%= a.label :attachment %>
