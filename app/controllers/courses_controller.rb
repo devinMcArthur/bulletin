@@ -27,6 +27,9 @@ class CoursesController < ApplicationController
 
   # Index of all courses
   def index
+    if !current_user.nil?
+      @user_courses = current_user.courses.paginate(page: params[:page])
+    end
     @course_feed = Course.where(public: true).all.paginate(page: params[:page])
   end
   
@@ -35,7 +38,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     
     @assignment = @course.assignments.build
-    @assignments = @course.assignments.paginate(page: params[:page])
+    @assignments = @course.assignments.paginate(page: params[:page]).order("due_date ASC")
     
     @requests = @course.requests.paginate(page: params[:page])
     

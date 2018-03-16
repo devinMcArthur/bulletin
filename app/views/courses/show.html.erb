@@ -19,7 +19,7 @@
     <% if !@course.description.nil? %>
       <p>
       <b>Description:</b>
-      <%= @course.description %>
+      <%= simple_format(@course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %>
       </p>
     <% end %>
     <% if @course.admin_id == current_user.id %>

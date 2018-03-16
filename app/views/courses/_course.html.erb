@@ -13,22 +13,22 @@
     
     <% if !course.description.nil? %>
         <% if course.description.length > 150 %>
-        <p><b>Description: </b><%= truncate(course.description, length: 150, seperator: ' ') %></p>
+        <p><b>Description: </b><%= truncate(simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %></p>
         <%= link_to '...Read more', '', class: "read-more-#{course.id} truncate-switch" %>
         <script>
           $('.read-more-<%= course.id %>').on('click', function(e) {
             e.preventDefault()
-            $(this).parent().html('<p><b>Title: </b><%= course.title %></p> <p><b>Description: </b><%= escape_javascript course.description %></p> <%= link_to '...Read less', '', class: "read-less-#{course.id} truncate-switch" %>')
+            $(this).parent().html('<p><b>Title: </b><%= course.title %></p> <p><b>Description: </b><%= escape_javascript simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p> <%= link_to '...Read less', '', class: "read-less-#{course.id} truncate-switch" %>')
           })
         </script>
         <script>
           $('.read-less-<%= course.id %>').on('click', function(d) {
             d.preventDefault()
-            $(this).parent().html('<p><b>Title: </b><%= course.title %></p> <%= escape_javascript truncate(course.description, length: 150, seperator: ' ') %> <%= link_to '...Read more', '', class: "read-more-#{course.id} truncate-switch" %>')
+            $(this).parent().html('<p><b>Title: </b><%= course.title %></p> <%= escape_javascript truncate(simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %> <%= link_to '...Read more', '', class: "read-more-#{course.id} truncate-switch" %>')
           })
         </script>
         <% else %>
-        <p><b>Description: </b><%= course.description %></p>
+        <p><b>Description: </b><%= simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p>
         <% end %>
     <% end %>
     

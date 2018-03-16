@@ -34,7 +34,7 @@
         <h3>Your Monthly Schedule</h3>
       </div>
       <div class="home-calendar">
-        <%= month_calendar events: @student_assignments, attribute: :due_date do |date, assignments| %>
+        <%= week_calendar events: @student_assignments, attribute: :due_date, number_of_weeks: 4 do |date, assignments| %>
           <%= date.day %>
           <% assignments.each do |assignment| %>
             <div class="calendar-assignment-item">
@@ -79,7 +79,7 @@
         <h3>Your Monthly Schedule</h3>
       </div>
       <div class="home-calendar">
-        <%= month_calendar events: @prof_assignments, attribute: :due_date do |date, assignments| %>
+        <%= week_calendar events: @prof_assignments, attribute: :due_date, number_of_weeks: 4 do |date, assignments| %>
           <%= date.day %>
           <% assignments.each do |assignment| %>
             <div class="calendar-assignment-item">
