@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     
     # This is used to prevent users from passing raw paramaters in a web request, but will always require the :user attribute
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role, :moodle_username, :moodle_password)
     end
     
     # Confirms a logged in user

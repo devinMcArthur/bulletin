@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @courses = Course.all.paginate(page: params[:page])
+    @courses = Course.where(public: true).all.paginate(page: params[:page])
     @user = User.new
     if logged_in?
       if current_user.professor == true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313182058) do
+ActiveRecord::Schema.define(version: 20180316175926) do
 
   create_table "assignment_attachments", force: :cascade do |t|
     t.string "attachment_file_name"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 20180313182058) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "professor", default: false
+    t.string "moodle_username"
+    t.string "moodle_password"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

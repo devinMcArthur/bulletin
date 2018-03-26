@@ -22,6 +22,9 @@ gem 'pickadate-rails'
 gem 'simple_calendar', '~> 2.0'
 gem 'paperclip',      '~> 5.2.1'
 gem 'paperclip-ghostscript'
+gem 'mechanize'
+gem 'nokogiri'
+gem 'aws-sdk', '~> 2.3'
 
 
 group :development, :test do
