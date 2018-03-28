@@ -1,4 +1,4 @@
-<%= form_for(@assignment) do |f| %>
+<%= form_for(@topic) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     
@@ -6,12 +6,15 @@
     <%= f.text_field :title, placeholder: " Title", class: "form-contents" %>
     
     <%= f.label :description %>
-    <%= f.text_area  :description, placeholder: " What does this assignment entail . . .", class: "form-contents", size: '30x5' %>
+    <%= f.text_area  :description, placeholder: " What is this topic regarding . . .", class: "form-contents", size: '30x5' %>
 
-    <%= f.label :due_date %>
-    <%= f.datetime_field :due_date %>
+    <%= f.label :relevant_date, "Relevant Date (Optional)" %>
+    <%= f.datetime_field :relevant_date %>
     
-    <%= f.fields_for :assignment_attachments do |a| %>
+    <%= f.label :release_date, "Accouncement Release Date (Optional)" %>
+    <%= f.datetime_field :release_date %>
+    
+    <%= f.fields_for :topic_attachments do |a| %>
       <%= a.label :attachment %>
       <%= a.file_field :attachment %>
     <% end %>

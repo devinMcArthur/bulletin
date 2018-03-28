@@ -40,16 +40,27 @@ class CoursesController < ApplicationController
     @assignment = @course.assignments.build
     @assignments = @course.assignments.paginate(page: params[:page]).order("due_date ASC")
     
+    @topic = @course.topics.build
+    @topics = @course.topics.paginate(page: params[:page]).order("relevant_date ASC")
+    
     @requests = @course.requests.paginate(page: params[:page])
     
-    @attachment = @assignment.assignment_attachments.build
-    
+    @assignment_attachment = @assignment.assignment_attachments.build
     # Create an array with all related attachments
-    @attachments = []
+    @assignment_attachments = []
     @assignments.each do |a|
       b = AssignmentAttachment.where(assignment_id: a.id)
       b.each do |f|
-        @attachments << f
+        @assignment_attachments << f
+      end
+    end
+    
+    @topic_attachment = @topic.topic_attachments.build
+    @topic_attachments = []
+    @topics.each do |a|
+      b = TopicAttachment.where(topic_id: a.id)
+      b.each do |f|
+        @topic_attachments << f
       end
     end
   end

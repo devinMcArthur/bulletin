@@ -27,15 +27,22 @@ Rails.application.routes.draw do
   resources :password_resets,        only: [:new, :create, :edit, :update]
   resources :courses,                only: [:new, :create, :destroy, :edit, :update, :show]
   resources :assignments,            only: [:create, :destroy, :edit, :update, :show]
-  resources :requests,               only: [:new, :create, :show, :index, :update, :edit]
+  resources :requests,               only: [:new, :create, :show, :index, :update, :edit, :destroy]
+  resources :topics,                 only: [:create, :destroy, :edit, :update, :show]
   resources :assignment_attachments
+  resources :topic_attachments
   
   resources :courses do
     resources :assignments
+    resources :topics
   end
   
   resources :assignments do
     resources :assignment_attachments
+  end
+  
+  resources :topics do 
+    resources :topic_attachments
   end
   
 end

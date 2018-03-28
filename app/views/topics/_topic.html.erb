@@ -1,0 +1,51 @@
+<div class="topic-item">
+  <p><b>Title: </b><u><%= topic.title %></u></p>
+  <% if !topic.description.blank? %>
+    <% if topic.description.length > 150 %>
+      <p><b>Description: </b><%= truncate(simple_format(topic.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %></p>
+      <%= link_to '...Read more', '', class: "read-more-#{topic.id} truncate-switch" %>
+      <script>
+        $('.read-more-<%= topic.id %>').on('click', function(e) {
+          e.preventDefault()
+          $(this).parent().html('<p><b>Title: </b><%= topic.title %></p> <p><b>Description: </b><%= escape_javascript simple_format(topic.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p> <%= link_to '...Read less', '', class: "read-less-#{topic.id} truncate-switch" %> <p><b>Relevant Date: </b><%= topic.relevant_date %></p>')
+        })
+      </script>
+      <script>
+        $('.read-less-<%= topic.id %>').on('click', function(d) {
+          d.preventDefault()
+          $(this).parent().html('<p><b>Title: </b><%= topic.title %></p> <p><b>Description: </b><%= escape_javascript truncate(simple_format(topic.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %></p> <%= link_to '...Read more', '', class: "read-more-#{topic.id} truncate-switch" %> <p><b>Relevant Date: </b><%= topic.relevant_date %></p>')
+        })
+      </script>
+    <% else %>
+      <p><b>Description: </b><%= simple_format(topic.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p>
+    <% end %>
+  <% end %>
+  <% if !topic.relevant_date.nil? %>
+    <p><b>Relevant Date: </b><%= topic.relevant_date %></p>
+  <% end %>
+  <% if !topic.release_date.nil? %>
+    <p><b>Announcement Release Date: </b><%= topic.release_date %></p>
+  <% end %>
+  
+  <% if !@topic_attachments.nil? %>
+    <% @topic_attachments.each do |a| %>
+      <% if !a.nil? %>
+        <% if a.topic_id == topic.id %>
+          <% if a.attachment.url != '/topic_attachments/original/missing.png' %>
+            <li style="list-style: none;">
+              <div class="topic-attachment">
+                <%= link_to a.attachment_file_name, a.attachment.url, target: :_blank, class: "attachment-item", :style => "text-decoration: none;" %>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <% if logged_in? && topic.course.admin_id == current_user.id && !current_page?(root_url) %>
+    <%= link_to "edit", edit_course_topic_path(@course, topic) %>
+    <%= link_to "delete", topic, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+  
+</div>

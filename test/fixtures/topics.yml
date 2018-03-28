@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  release_date: 2018-03-26 17:46:40
+  relevant_date: 2018-03-26 17:46:40
+  course_id: 1
+  public: false
+
+two:
+  title: MyString
+  description: MyText
+  release_date: 2018-03-26 17:46:40
+  relevant_date: 2018-03-26 17:46:40
+  course_id: 1
+  public: false

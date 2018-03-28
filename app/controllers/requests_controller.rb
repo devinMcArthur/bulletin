@@ -47,6 +47,15 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
   end
   
+  def destroy
+   @request = Request.find(params[:id])
+   @user = User.find_by(id: @request.user_id)
+   @course = Course.find_by(id: @request.course_id)
+   @user.courses.delete(@course)
+   @request.destroy
+   redirect_to request.referrer || current_user
+  end
+  
   private 
     def request_params
       params.permit(:course_id, :user_id, :approved)

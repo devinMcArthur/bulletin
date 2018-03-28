@@ -24,8 +24,8 @@
     <p><b>Due Date: </b><%= assignment.due_date %></p>
   <% end %>
   
-  <% if !@attachments.nil? %>
-    <% @attachments.each do |a| %>
+  <% if !@assignment_attachments.nil? %>
+    <% @assignment_attachments.each do |a| %>
       <% if !a.nil? %>
         <% if a.assignment_id == assignment.id %>
           <% if a.attachment.url != '/attachments/original/missing.png' %>
@@ -40,7 +40,7 @@
     <% end %>
   <% end %>
   
-  <% if assignment.course.admin_id == current_user.id && !current_page?(root_url) %>
+  <% if logged_in? && assignment.course.admin_id == current_user.id && !current_page?(root_url) %>
     <%= link_to "edit", edit_course_assignment_path(@course, assignment) %>
     <%= link_to "delete", assignment, method: :delete, data: { confirm: "You sure?" } %>
   <% end %>

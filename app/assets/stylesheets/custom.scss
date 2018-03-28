@@ -115,6 +115,26 @@ p {
   padding: 5px;
 }
 
+.empty-children-template {
+  padding-left: 15px;
+}
+
+.course-assignment-feed {
+  height: auto;
+  max-height: 500px;
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.course-topic-feed {
+  height: auto;
+  max-height: 500px;
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 /* Assignments */
 
 .dropdown-assignment-form {
@@ -146,6 +166,22 @@ p {
     text-decoration: none;
     decoration: none;
   }
+}
+
+/* Topics */
+
+.topic-item {
+  padding: 5px;
+  border-top: 1px solid #b2b2b2;
+  border-bottom: 1px solid #b2b2b2;
+}
+
+.dropdown-topic-form {
+  padding: 5px;
+}
+
+.topic-attachment {
+  margin: 10px;
 }
 
 /* Requests */

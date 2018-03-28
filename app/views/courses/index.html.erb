@@ -8,8 +8,8 @@
     <% end %>
   </aside>
   <div class="col-sm-8 col-md-8 col-lg-8">
-    <% if !@user_courses.nil? %>
-      <h1>Your Courses</h1>
+    <% if !@user_courses.nil? && @user_courses.any? %>
+      <h1>Your Enrolled Courses</h1>
       <ol class="courses-list">
         <%= render @user_courses %>
       </ol>
