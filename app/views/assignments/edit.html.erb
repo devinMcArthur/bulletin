@@ -12,6 +12,9 @@
     <%= f.label :due_date %>
     <%= f.date_field :due_date %>
     
+    <%= f.label :importance %>
+    <%= f.select :importance, [['Optional', "Optional"], ['Standard', "Standard"], ['High', "High"]], {}, {class: "form-control"} %>
+    
     <%= render 'shared/assignment_attachment_form', :f => f %>
     
     <%= f.text_field :course_id, value: @course.id, type: "hidden" %>
