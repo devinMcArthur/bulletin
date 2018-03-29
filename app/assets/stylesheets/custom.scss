@@ -212,21 +212,51 @@ p {
 /* Calendar */
 
 .calendar-assignment-item-optional {
-  border: solid 1px GREEN;
+  background: GREEN;
+  border: solid 1px BLACK;
+  border-radius: 5px 2px;
   padding-left: 5px;
+  margin: 2px;
   font-size: auto;
+  a {
+    color: BLACK !important;
+    font-weight: bold;
+  }
+  a:hover {
+    background: none;
+  }
 }
 
 .calendar-assignment-item-standard {
-  border: solid 1px $brand_color;
+  background: $brand_color;
+  border: solid 1px BLACK;
+  border-radius: 5px 2px;
   padding-left: 5px;
+  margin: 2px;
   font-size: auto;
+  a {
+    color: BLACK !important;
+    font-weight: bold;
+  }
+  a:hover {
+    background: none;
+  }
 }
 
 .calendar-assignment-item-high {
-  border: solid 1px RED;
+  background: RED;
+  border: solid 1px BLACK;
+  border-radius: 5px 2px;
   padding-left: 5px;
+  margin: 2px;
   font-size: auto;
+  a {
+    color: BLACK !important;
+    font-weight: bold;
+  }
+  a:hover {
+    background: none;
+  }
 }
 
 .calendar-assignment-item {
