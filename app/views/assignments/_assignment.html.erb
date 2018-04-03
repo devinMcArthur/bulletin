@@ -7,7 +7,11 @@
 <% else %>
  <div class="assignment-item">
 <% end %>
-    <p><b>Title: </b><u><%= assignment.title %></u></p>
+  <% if current_page?(root_url) %>
+    <p class="assignment-feed-title"><b>Title: </b><%= link_to assignment.title, Course.find(assignment.course_id) %></p>
+  <% else %>
+    <p class="assignment-feed-title"><b>Title: </b><%= assignment.title %></p>
+  <% end %>
     <% if !assignment.description.blank? %>
       <% if assignment.description.length > 150 %>
         <p><b>Description: </b><%= truncate(simple_format(assignment.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe, length: 150, seperator: ' ') %></p>

@@ -54,7 +54,7 @@
         <% if @course.assignments.exists? %>
           <%= render @assignments.where('due_date > ?', DateTime.now.beginning_of_day), locals: { course: @course } %>
           <% if @assignments.where('due_date < ?', DateTime.now.beginning_of_day).exists? %>
-            <h4><u>Passed due Assignments</u></h4>
+            <h4 class="assignment-passed"><u>Passed due Assignments</u></h4>
             <%= render @assignments.where('due_date < ?', DateTime.now.beginning_of_day), locals: { course: @course } %>
           <% end %>
         <% else %>

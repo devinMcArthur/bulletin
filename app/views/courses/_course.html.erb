@@ -32,12 +32,14 @@
         <% end %>
     <% end %>
     
-    <% if !current_user.nil? %>
-        <% if course.admin_id == current_user.id %>
-          </br><%= link_to "delete", course, method: :delete, data: { confirm: "You sure?" } %>
-          <%= link_to "edit", edit_course_path(course), class: "edit-course-link" %>
-        <% elsif current_page?(current_user) %>
-          </br><%= link_to "unenroll", Request.find_by(course_id: course.id, user_id: current_user.id), method: :delete, data: { confirm: "You sure?" } %>
-        <% end %>
-    <% end %>
+    <div class="course-feed-options">
+      <% if !current_user.nil? %>
+          <% if course.admin_id == current_user.id %>
+            </br><%= link_to "delete", course, method: :delete, data: { confirm: "You sure?" } %>
+            <%= link_to "edit", edit_course_path(course), class: "edit-course-link" %>
+          <% elsif current_page?(current_user) %>
+            </br><%= link_to "unenroll", Request.find_by(course_id: course.id, user_id: current_user.id), method: :delete, data: { confirm: "You sure?" } %>
+          <% end %>
+      <% end %>
+    </div>
 </li>

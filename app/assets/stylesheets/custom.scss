@@ -95,7 +95,10 @@ p {
   text-align: left;
   margin: 0;
   a {
-    text-decoration: none;
+    color: BLACK !important;
+    &:hover {
+      background: none;
+    }
   }
 }
 
@@ -106,6 +109,7 @@ p {
 .courses-home-feed {
   height: auto;
   max-height: 500px;
+  min-height: 500px;
   width: auto;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -135,6 +139,15 @@ p {
   overflow-y: scroll;
 }
 
+.course-feed-options {
+  a {
+    color: GRAY !important;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
 /* Assignments */
 
 .dropdown-assignment-form {
@@ -150,6 +163,7 @@ p {
 .assignments-home-feed {
   height: auto;
   max-height: 500px;
+  min-height: 500px;
   width: auto;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -178,6 +192,20 @@ p {
 
 .assignment-feed-high {
   border-left: solid 5px RED;
+}
+
+.assignment-feed-title {
+  font-size: 125%;
+  a {
+    color: BLACK !important;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.assignment-passed {
+  padding-left: 10px;
 }
 
 /* Topics */
@@ -221,9 +249,9 @@ p {
   a {
     color: BLACK !important;
     font-weight: bold;
-  }
-  a:hover {
-    background: none;
+    &:hover {
+      background: none;
+    }
   }
 }
 
@@ -237,9 +265,9 @@ p {
   a {
     color: BLACK !important;
     font-weight: bold;
-  }
-  a:hover {
-    background: none;
+    &:hover {
+      background: none;
+    }
   }
 }
 
@@ -253,9 +281,9 @@ p {
   a {
     color: BLACK !important;
     font-weight: bold;
-  }
-  a:hover {
-    background: none;
+    &:hover {
+      background: none;
+    }
   }
 }
 
@@ -301,6 +329,7 @@ p {
   &:hover {
     color: #3d3d3d;
     text-decoration: none;
+    background: none;
   }
 }
 

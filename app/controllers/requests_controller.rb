@@ -23,11 +23,10 @@ class RequestsController < ApplicationController
   end
 
   def show
-    
   end
 
   def index
-    @requests = Request.paginate(page: params[:page]).all
+    @requests = Request.where(user_id: current_user.id).paginate(page: params[:page])
   end
 
   def update
