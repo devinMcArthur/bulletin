@@ -4,6 +4,30 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
+    <h3>This Weeks Schedule</h3>
+  </div>
+  <div class="home-calendar">
+    <%= week_calendar events: @assignments, attribute: :due_date do |date, assignments| %>
+      <%= date.day %>
+      <% assignments.each do |assignment| %>
+        <% if assignment.importance == "Optional" %>
+          <div class="calendar-assignment-item-optional">
+        <% elsif assignment.importance == "Standard" %>
+          <div class="calendar-assignment-item-standard">
+        <% elsif assignment.importance == "High" %>
+          <div class="calendar-assignment-item-high">
+        <% else %>
+          <div class="calendar-assignment-item">
+        <% end %>
+            <%= link_to truncate(assignment.title, length: 15, seperator: ' '), Course.find(assignment.course_id), :title => Course.find(assignment.course_id).title + ": " + assignment.title %>
+          </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
     <h3>Course Info</h3>
   </div>
   <div class="course-info"

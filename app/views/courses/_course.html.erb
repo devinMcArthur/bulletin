@@ -8,17 +8,17 @@
     <% end %>
     
     <p>
-        <b>Course Number:</b> <%= course.code %><% if !course.section.nil? %>:<%= course.section %><% end %>
+        <%= course.code %><% if !course.section.nil? %>:<%= course.section %><% end %>
     </p>
     
     <% if !course.description.nil? %>
         <% if course.description.length > 150 %>
-          <p><b>Description: </b><%= truncate(course.description, length: 150, seperator: ' ') %></p>
+          <p><%= truncate(course.description, length: 150, seperator: ' ') %></p>
           <%= link_to '...Read more', '', class: "read-more-#{course.id} truncate-switch" %>
           <script>
             $('.read-more-<%= course.id %>').on('click', function(e) {
               e.preventDefault()
-              $(this).parent().html('<p><h1 class="course-header-link"><%= link_to course.title, course %></h1></p> <p><b>Description: </b><%= escape_javascript simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p> <%= link_to '...Read less', '', class: "read-less-#{course.id} truncate-switch" %>')
+              $(this).parent().html('<p><h1 class="course-header-link"><%= link_to course.title, course %></h1></p><p><%= course.code %><% if !course.section.nil? %>:<%= course.section %><% end %></p> <p><%= escape_javascript simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p> <%= link_to '...Read less', '', class: "read-less-#{course.id} truncate-switch" %>')
             })
           </script>
           <script>
@@ -28,7 +28,7 @@
             })
           </script>
         <% else %>
-          <p><b>Description: </b><%= simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p>
+          <p><%= simple_format(course.description).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %></p>
         <% end %>
     <% end %>
     
